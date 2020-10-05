@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "1026961598679",
+    "firebase_url": "https://aychat-a3aac.firebaseio.com",
+    "project_id": "aychat-a3aac",
+    "storage_bucket": "aychat-a3aac.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1026961598679:android:e79a4d16e27ab9b630a892",
+        "android_client_info": {
+          "package_name": "com.a.ayc"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1026961598679-kfhmiiike04at7gjjsgrtsorv7en9p4c.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIxR5-jG1tXPUrh_fZ7DitRH7UrivHKcs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1026961598679-kfhmiiike04at7gjjsgrtsorv7en9p4c.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
