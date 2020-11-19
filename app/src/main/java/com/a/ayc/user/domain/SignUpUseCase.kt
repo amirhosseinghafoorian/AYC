@@ -15,6 +15,6 @@ class SignUpUseCase @Inject constructor(
 
     fun validatePassword(password: String) = validateInput.checkPasswordValidation(password)
 
-    fun signUp(email: String, password: String): Task<AuthResult> = userRemote.signUp(email, password)
+    fun signUp(email: String, password: String): Task<AuthResult>? = userRemote.signUp(email, password)
 
 }

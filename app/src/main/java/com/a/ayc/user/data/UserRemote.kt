@@ -8,7 +8,7 @@ import javax.inject.Inject
 class UserRemote
 @Inject constructor(private val auth: FirebaseAuth) {
 
-    fun signUp(email: String, password: String): Task<AuthResult> {
+    fun signUp(email: String, password: String): Task<AuthResult>? {
         return auth.createUserWithEmailAndPassword(email, password)
     }
 
