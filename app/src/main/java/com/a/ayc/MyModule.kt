@@ -1,5 +1,6 @@
 package com.a.ayc
 
+import com.a.ayc.user.data.UserRemote
 import com.a.ayc.user.data.ValidateInput
 import dagger.Module
 import dagger.Provides
@@ -15,5 +16,11 @@ object MyModule {
     @Provides
     fun provideValidation() : ValidateInput {
         return ValidateInput()
+    }
+
+    @Singleton
+    @Provides
+    fun provideUserRemote() : UserRemote {
+        return UserRemote()
     }
 }

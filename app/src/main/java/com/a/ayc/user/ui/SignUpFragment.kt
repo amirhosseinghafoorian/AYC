@@ -29,28 +29,19 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        mAuth = FirebaseAuth.getInstance()
+        signUpViewModel.isSignedIn.observe(viewLifecycleOwner, { result ->
+            if (result != null) {
+                if (result) Toast.makeText(requireContext(), "Navigated ", Toast.LENGTH_SHORT)
+                    .show()
+                else Toast.makeText(requireContext(), "false result", Toast.LENGTH_SHORT).show()
+            }
+        })
 
         btn_sign_up.setOnClickListener {
             val email = signUp_et_2.editText?.text.toString()
             val password = signUp_et_3.editText?.text.toString()
             if (validateInputs(email, password)) {
-                mAuth.createUserWithEmailAndPassword(email, password)
-                    .addOnCompleteListener { task ->
-                        if (task.isSuccessful) {
-                            Toast.makeText(
-                                requireContext(),
-                                "Signed Up Successfully",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        } else {
-                            Toast.makeText(
-                                requireContext(),
-                                "Sign Up Failed",
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        }
-                    }
+                signUpViewModel.signUp(email , password)
             }
         }
     }
