@@ -27,7 +27,11 @@ class ValidateInput {
                 .show()
             return false
         } else if (password.length < 6) {
-            Toast.makeText(MyApp.publicApp, "Enter a password with at least 6 characters", Toast.LENGTH_SHORT)
+            Toast.makeText(
+                MyApp.publicApp,
+                "Enter a password with at least 6 characters",
+                Toast.LENGTH_SHORT
+            )
                 .show()
             return false
         }

@@ -5,8 +5,8 @@ import javax.inject.Inject
 
 class SignUpUseCase @Inject constructor(private val validateInput: ValidateInput) {
 
-    fun validateEmail(email : String) = validateInput.checkEmailValidation(email)
+    fun validateEmail(email: String) = validateInput.checkEmailValidation(email)
 
-    fun validatePassword(password : String) = validateInput.checkPasswordValidation(password)
+    fun validatePassword(password: String) = validateInput.checkPasswordValidation(password)
 
 }

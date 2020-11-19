@@ -9,8 +9,8 @@ class SignUpViewModel
     private val signUpUseCase: SignUpUseCase
 ) : ViewModel() {
 
-    fun validateEmail(email : String) = signUpUseCase.validateEmail(email)
+    fun validateEmail(email: String) = signUpUseCase.validateEmail(email)
 
-    fun validatePassword(password : String) = signUpUseCase.validatePassword(password)
+    fun validatePassword(password: String) = signUpUseCase.validatePassword(password)
 
 }
