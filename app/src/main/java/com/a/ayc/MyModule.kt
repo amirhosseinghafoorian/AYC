@@ -2,6 +2,7 @@ package com.a.ayc
 
 import com.a.ayc.user.data.UserRemote
 import com.a.ayc.user.data.ValidateInput
+import com.google.firebase.auth.FirebaseAuth
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -21,6 +22,12 @@ object MyModule {
     @Singleton
     @Provides
     fun provideUserRemote() : UserRemote {
-        return UserRemote()
+        return UserRemote(provideAuth())
+    }
+
+    @Singleton
+    @Provides
+    fun provideAuth() : FirebaseAuth {
+        return FirebaseAuth.getInstance()
     }
 }

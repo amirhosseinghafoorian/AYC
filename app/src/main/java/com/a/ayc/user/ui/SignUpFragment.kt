@@ -11,13 +11,15 @@ import com.a.ayc.R
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
 
     private val signUpViewModel: SignUpViewModel by viewModels()
-    lateinit var mAuth: FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,11 +31,17 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        signUpViewModel.isSignedIn.observe(viewLifecycleOwner, { result ->
-            if (result != null) {
-                if (result) Toast.makeText(requireContext(), "Navigated ", Toast.LENGTH_SHORT)
-                    .show()
-                else Toast.makeText(requireContext(), "false result", Toast.LENGTH_SHORT).show()
+        signUpViewModel.currentUser.observe(viewLifecycleOwner, { result ->
+            if (result.isComplete) {
+                if (result.result?.user == null) {
+                    Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "navigated : ${result.result!!.user!!.uid}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
             }
         })
 
@@ -41,7 +49,9 @@ class SignUpFragment : Fragment() {
             val email = signUp_et_2.editText?.text.toString()
             val password = signUp_et_3.editText?.text.toString()
             if (validateInputs(email, password)) {
-                signUpViewModel.signUp(email , password)
+                CoroutineScope(Dispatchers.IO).launch {
+                    signUpViewModel.signUp(email, password)
+                }
             }
         }
     }
@@ -49,7 +59,7 @@ class SignUpFragment : Fragment() {
     private fun validateInputs(
         email: String,
         password: String
-    ) =
-        signUpViewModel.validateEmail(email) &&
+    ) = signUpViewModel.validateEmail(email) &&
                 signUpViewModel.validatePassword(password)
+
 }
