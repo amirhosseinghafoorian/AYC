@@ -16,6 +16,8 @@ class ValidateInput {
                 .show()
             return false
         }
+        Toast.makeText(MyApp.publicApp, "Email Confirmed", Toast.LENGTH_SHORT)
+            .show()
         return true
     }
 }

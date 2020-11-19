@@ -25,7 +25,9 @@ class SignUpFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        validateInputs()
+        btn_sign_up.setOnClickListener {
+            validateInputs()
+        }
     }
 
     private fun validateInputs(){
