@@ -32,6 +32,6 @@ class SignUpFragment : Fragment() {
 
     private fun validateInputs(){
         signUpViewModel.validateEmail(signUp_et_2.editText?.text.toString())
-
+        signUpViewModel.validatePassword(signUp_et_3.editText?.text.toString())
     }
 }

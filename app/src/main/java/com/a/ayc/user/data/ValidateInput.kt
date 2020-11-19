@@ -20,4 +20,20 @@ class ValidateInput {
             .show()
         return true
     }
+
+    fun checkPasswordValidation(password: String): Boolean {
+        if (password.isEmpty()) {
+            Toast.makeText(MyApp.publicApp, "Password can not be empty", Toast.LENGTH_SHORT)
+                .show()
+            return false
+        } else if (password.length < 6) {
+            Toast.makeText(MyApp.publicApp, "Enter a password with at least 6 characters", Toast.LENGTH_SHORT)
+                .show()
+            return false
+        }
+        Toast.makeText(MyApp.publicApp, "password confirmed", Toast.LENGTH_SHORT)
+            .show()
+        return true
+    }
+
 }

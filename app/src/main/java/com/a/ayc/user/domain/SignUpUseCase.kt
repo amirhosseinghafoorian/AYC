@@ -7,4 +7,6 @@ class SignUpUseCase @Inject constructor(private val validateInput: ValidateInput
 
     fun validateEmail(email : String) = validateInput.checkEmailValidation(email)
 
+    fun validatePassword(password : String) = validateInput.checkPasswordValidation(password)
+
 }
