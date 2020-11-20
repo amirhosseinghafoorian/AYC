@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.FirebaseUser
 
 class SplashFragment : Fragment() {
+
+    lateinit var mAuth : FirebaseAuth
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -19,6 +23,10 @@ class SplashFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToNavigation())
+        mAuth = FirebaseAuth.getInstance()
+        val currentUser = mAuth.currentUser
+
+        if (currentUser == null) findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToNavigation())
+        else findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
     }
 }

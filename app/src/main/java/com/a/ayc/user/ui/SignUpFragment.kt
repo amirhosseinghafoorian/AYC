@@ -28,7 +28,7 @@ class SignUpFragment : Fragment() {
 
         signUpViewModel.currentUser.observe(viewLifecycleOwner, { result ->
             if (result == null || result.exception?.message != null) {
-                Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Failed : ${result.exception?.message}", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(
                     requireContext(),
