@@ -43,7 +43,8 @@ class SignUpFragment : Fragment() {
             val email = signUp_et_1.editText?.text.toString()
             val password = signUp_et_2.editText?.text.toString()
             val repeatPassword = signUp_et_3.editText?.text.toString()
-            if (validateInputs(email, password, repeatPassword)) {
+            val name = signUp_et_4.editText?.text.toString()
+            if (validateInputs(email, password, repeatPassword, name)) {
                 signUpViewModel.signUp(email, password)
             }
         }
@@ -52,9 +53,11 @@ class SignUpFragment : Fragment() {
     private fun validateInputs(
         email: String,
         password: String,
-        repeatPassword: String
+        repeatPassword: String,
+        name: String
     ) = signUpViewModel.validateEmail(email) &&
             signUpViewModel.validatePassword(password) &&
-            signUpViewModel.validateTheSamePassword(password, repeatPassword)
+            signUpViewModel.validateTheSamePassword(password, repeatPassword) &&
+            signUpViewModel.validateName(name)
 
 }

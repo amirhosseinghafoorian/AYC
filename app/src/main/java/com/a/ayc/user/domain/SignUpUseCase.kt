@@ -14,6 +14,8 @@ class SignUpUseCase @Inject constructor(
     private val homeRemote: HomeRemote
 ) {
 
+    fun validateName(name: String) = validateInput.checkNameValidation(name)
+
     fun validateEmail(email: String) = validateInput.checkEmailValidation(email)
 
     fun validatePassword(password: String) = validateInput.checkPasswordValidation(password)

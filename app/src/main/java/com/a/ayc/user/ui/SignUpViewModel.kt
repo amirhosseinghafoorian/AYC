@@ -14,6 +14,8 @@ class SignUpViewModel
 
     val currentUser = MutableLiveData<Task<AuthResult>>()
 
+    fun validateName(name: String) = signUpUseCase.validateName(name)
+
     fun validateEmail(email: String) = signUpUseCase.validateEmail(email)
 
     fun validatePassword(password: String) = signUpUseCase.validatePassword(password)
