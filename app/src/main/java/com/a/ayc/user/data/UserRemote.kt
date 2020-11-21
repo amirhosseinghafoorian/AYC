@@ -6,6 +6,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import javax.inject.Inject
 
+
 class UserRemote
 @Inject constructor(
     private val auth: FirebaseAuth,
@@ -20,7 +21,7 @@ class UserRemote
         return auth.signInWithEmailAndPassword(email, password)
     }
 
-    fun setUserInfo(name: String , username : String) {
+    fun setUserInfo(name: String, username: String) {
         rootReference
             .child("Users")
             .child(auth.currentUser?.uid.toString())

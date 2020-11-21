@@ -11,4 +11,6 @@ class UserInfoUseCase @Inject constructor(
 
     fun setUserInfo(name: String , username : String) = userRemote.setUserInfo(name , username)
 
+    fun getUserInfo() = homeRemote.getUserInfo()
+
 }

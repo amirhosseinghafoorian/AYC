@@ -27,7 +27,11 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        tv_home_2.text = homeViewModel.currentUser()?.email
+        homeViewModel.name.observe(viewLifecycleOwner, { name ->
+            if (name != null) tv_home_2.text = name
+        })
+
+        homeViewModel.getUserInfo()
 
         btn_home_1.setOnClickListener {
             showLogoutDialog()
