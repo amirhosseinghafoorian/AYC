@@ -29,5 +29,12 @@ class SignUpViewModel
         }
     }
 
+    fun login(email: String, password: String) {
+        val result = signUpUseCase.login(email, password)
+        result?.addOnCompleteListener {
+            currentUser.postValue(result)
+        }
+    }
+
     fun currentUser(): FirebaseUser? = signUpUseCase.currentUser()
 }

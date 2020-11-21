@@ -31,7 +31,7 @@ class HomeFragment : Fragment() {
 
         btn_home_1.setOnClickListener {
             mAuth.signOut()
-            findNavController().navigateUp()
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthentication())
         }
     }
 }

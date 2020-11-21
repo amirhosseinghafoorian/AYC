@@ -24,5 +24,8 @@ class SignUpUseCase @Inject constructor(
     fun signUp(email: String, password: String): Task<AuthResult>? =
         userRemote.signUp(email, password)
 
+    fun login(email: String, password: String): Task<AuthResult>? =
+        userRemote.login(email, password)
+
     fun currentUser(): FirebaseUser? = homeRemote.currentUser()
 }
