@@ -28,7 +28,11 @@ class SignUpFragment : Fragment() {
 
         signUpViewModel.currentUser.observe(viewLifecycleOwner, { result ->
             if (result == null || result.exception?.message != null) {
-                Toast.makeText(requireContext(), "Failed : ${result.exception?.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Failed : ${result.exception?.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
             } else {
                 Toast.makeText(
                     requireContext(),
@@ -39,9 +43,10 @@ class SignUpFragment : Fragment() {
         })
 
         btn_sign_up.setOnClickListener {
-            val email = signUp_et_2.editText?.text.toString()
-            val password = signUp_et_3.editText?.text.toString()
-            if (validateInputs(email, password)) {
+            val email = signUp_et_1.editText?.text.toString()
+            val password = signUp_et_2.editText?.text.toString()
+            val repeatPassword = signUp_et_3.editText?.text.toString()
+            if (validateInputs(email, password, repeatPassword)) {
                 signUpViewModel.signUp(email, password)
             }
         }
@@ -49,8 +54,10 @@ class SignUpFragment : Fragment() {
 
     private fun validateInputs(
         email: String,
-        password: String
+        password: String,
+        repeatPassword: String
     ) = signUpViewModel.validateEmail(email) &&
-            signUpViewModel.validatePassword(password)
+            signUpViewModel.validatePassword(password) &&
+            signUpViewModel.validateTheSamePassword(password, repeatPassword)
 
 }

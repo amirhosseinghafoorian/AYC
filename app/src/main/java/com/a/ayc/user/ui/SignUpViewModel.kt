@@ -19,6 +19,9 @@ class SignUpViewModel
 
     fun validatePassword(password: String) = signUpUseCase.validatePassword(password)
 
+    fun validateTheSamePassword(password: String, repeatPassword: String) =
+        signUpUseCase.validateTheSamePassword(password, repeatPassword)
+
     fun signUp(email: String, password: String) {
         val result = signUpUseCase.signUp(email, password)
         result?.addOnCompleteListener {
@@ -26,5 +29,5 @@ class SignUpViewModel
         }
     }
 
-    fun currentUser() : FirebaseUser? = signUpUseCase.currentUser()
+    fun currentUser(): FirebaseUser? = signUpUseCase.currentUser()
 }

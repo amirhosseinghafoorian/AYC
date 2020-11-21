@@ -11,7 +11,9 @@ import com.a.ayc.R
 import com.a.ayc.user.ui.SignUpViewModel
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class SplashFragment : Fragment() {
 
     private val signUpViewModel: SignUpViewModel by viewModels()

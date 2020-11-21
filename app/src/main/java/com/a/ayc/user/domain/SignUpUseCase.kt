@@ -18,7 +18,11 @@ class SignUpUseCase @Inject constructor(
 
     fun validatePassword(password: String) = validateInput.checkPasswordValidation(password)
 
-    fun signUp(email: String, password: String): Task<AuthResult>? = userRemote.signUp(email, password)
+    fun validateTheSamePassword(password: String, repeatPassword: String) =
+        validateInput.checkTheSamePassword(password, repeatPassword)
 
-    fun currentUser() : FirebaseUser? = homeRemote.currentUser()
+    fun signUp(email: String, password: String): Task<AuthResult>? =
+        userRemote.signUp(email, password)
+
+    fun currentUser(): FirebaseUser? = homeRemote.currentUser()
 }

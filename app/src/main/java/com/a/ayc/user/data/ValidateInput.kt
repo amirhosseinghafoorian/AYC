@@ -40,4 +40,12 @@ class ValidateInput {
         return true
     }
 
+    fun checkTheSamePassword(password: String, repeatPassword: String): Boolean {
+        return if (password == repeatPassword) true
+        else {
+            Toast.makeText(MyApp.publicApp, "passwords don't match", Toast.LENGTH_SHORT).show()
+            false
+        }
+    }
+
 }
