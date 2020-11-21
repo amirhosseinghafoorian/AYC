@@ -11,8 +11,6 @@ import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
-import kotlinx.android.synthetic.main.fragment_sign_up.*
-import kotlinx.android.synthetic.main.fragment_sign_up.btn_sign_up
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -45,6 +43,7 @@ class LoginFragment : Fragment() {
             val email = login_et_1.editText?.text.toString()
             val password = login_et_2.editText?.text.toString()
             if (validateInputs(email, password)) {
+                signUpViewModel.logout()
                 signUpViewModel.login(email, password)
             }
         }

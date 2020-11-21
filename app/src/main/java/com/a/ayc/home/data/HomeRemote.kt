@@ -9,4 +9,6 @@ class HomeRemote
 
     fun currentUser(): FirebaseUser? = auth.currentUser
 
+    fun logout() = auth.signOut()
+
 }

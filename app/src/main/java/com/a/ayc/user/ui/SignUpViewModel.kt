@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.a.ayc.user.domain.SignUpUseCase
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseUser
 
 class SignUpViewModel
 @ViewModelInject constructor(
@@ -36,5 +35,6 @@ class SignUpViewModel
         }
     }
 
-    fun currentUser(): FirebaseUser? = signUpUseCase.currentUser()
+    fun logout() = signUpUseCase.logout()
+
 }

@@ -28,4 +28,6 @@ class SignUpUseCase @Inject constructor(
         userRemote.login(email, password)
 
     fun currentUser(): FirebaseUser? = homeRemote.currentUser()
+
+    fun logout() = homeRemote.logout()
 }
