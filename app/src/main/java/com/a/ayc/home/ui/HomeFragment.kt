@@ -1,5 +1,6 @@
 package com.a.ayc.home.ui
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
+
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -29,8 +31,23 @@ class HomeFragment : Fragment() {
         tv_home_2.text = homeViewModel.currentUser()?.email
 
         btn_home_1.setOnClickListener {
-            homeViewModel.logout()
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthentication())
+            showLogoutDialog()
         }
     }
+
+    fun showLogoutDialog() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setMessage("Are you sure you want to logout ? ")
+            .setPositiveButton("Yes.") { _, _ ->
+                homeViewModel.logout()
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthentication())
+            }
+            .setNegativeButton("No!") { dialog, _ -> // User cancelled the dialog
+                dialog.dismiss()
+            }
+        val alertDialog = builder.create()
+        alertDialog.show()
+
+    }
+
 }
