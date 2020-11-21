@@ -12,7 +12,6 @@ import com.a.ayc.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 
-
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 

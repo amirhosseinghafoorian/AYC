@@ -1,8 +1,9 @@
 package com.a.ayc
 
-import com.a.ayc.user.data.UserRemote
 import com.a.ayc.user.data.ValidateInput
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DatabaseReference
+import com.google.firebase.database.FirebaseDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,19 +16,25 @@ object MyModule {
 
     @Singleton
     @Provides
-    fun provideValidation() : ValidateInput {
+    fun provideValidation(): ValidateInput {
         return ValidateInput()
     }
 
     @Singleton
     @Provides
-    fun provideUserRemote() : UserRemote {
-        return UserRemote(provideAuth())
+    fun provideAuth(): FirebaseAuth {
+        return FirebaseAuth.getInstance()
     }
 
     @Singleton
     @Provides
-    fun provideAuth() : FirebaseAuth {
-        return FirebaseAuth.getInstance()
+    fun provideDatabase(): FirebaseDatabase {
+        return FirebaseDatabase.getInstance()
+    }
+
+    @Singleton
+    @Provides
+    fun provideDatabaseReference(): DatabaseReference {
+        return provideDatabase().reference
     }
 }

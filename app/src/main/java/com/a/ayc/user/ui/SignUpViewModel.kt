@@ -4,12 +4,14 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.a.ayc.user.domain.SignUpUseCase
+import com.a.ayc.user.domain.UserInfoUseCase
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 
 class SignUpViewModel
 @ViewModelInject constructor(
-    private val signUpUseCase: SignUpUseCase
+    private val signUpUseCase: SignUpUseCase,
+    private val userInfoUseCase: UserInfoUseCase
 ) : ViewModel() {
 
     val currentUser = MutableLiveData<Task<AuthResult>>()
@@ -38,5 +40,7 @@ class SignUpViewModel
     }
 
     fun logout() = signUpUseCase.logout()
+
+    fun setUserInfo(name: String) = userInfoUseCase.setUserInfo(name)
 
 }
