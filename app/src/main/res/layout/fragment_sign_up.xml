@@ -119,7 +119,7 @@
         android:id="@+id/btn_sign_up"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="80dp"
+        android:layout_marginTop="30dp"
         android:backgroundTint="@android:color/black"
         android:text="@string/create_account"
         android:textColor="@android:color/white"

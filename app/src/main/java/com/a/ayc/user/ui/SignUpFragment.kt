@@ -55,9 +55,10 @@ class SignUpFragment : Fragment() {
         password: String,
         repeatPassword: String,
         name: String
-    ) = signUpViewModel.validateEmail(email) &&
+    ) = signUpViewModel.validateName(name) &&
+            signUpViewModel.validateEmail(email) &&
             signUpViewModel.validatePassword(password) &&
-            signUpViewModel.validateTheSamePassword(password, repeatPassword) &&
-            signUpViewModel.validateName(name)
+            signUpViewModel.validateTheSamePassword(password, repeatPassword)
+
 
 }
