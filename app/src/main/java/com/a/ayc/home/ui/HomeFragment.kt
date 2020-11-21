@@ -35,14 +35,14 @@ class HomeFragment : Fragment() {
         }
     }
 
-    fun showLogoutDialog() {
+    private fun showLogoutDialog() {
         val builder = AlertDialog.Builder(requireContext())
         builder.setMessage("Are you sure you want to logout ? ")
-            .setPositiveButton("Yes.") { _, _ ->
+            .setPositiveButton("Yes") { _, _ ->
                 homeViewModel.logout()
                 findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToAuthentication())
             }
-            .setNegativeButton("No!") { dialog, _ -> // User cancelled the dialog
+            .setNegativeButton("No") { dialog, _ -> // User cancelled the dialog
                 dialog.dismiss()
             }
         val alertDialog = builder.create()
