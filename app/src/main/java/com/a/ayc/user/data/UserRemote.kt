@@ -20,11 +20,15 @@ class UserRemote
         return auth.signInWithEmailAndPassword(email, password)
     }
 
-    fun setUserInfo(name: String) {
+    fun setUserInfo(name: String , username : String) {
         rootReference
             .child("Users")
             .child(auth.currentUser?.uid.toString())
             .child("Name").setValue(name)
+        rootReference
+            .child("Users")
+            .child(auth.currentUser?.uid.toString())
+            .child("Username").setValue(username)
     }
 
 }

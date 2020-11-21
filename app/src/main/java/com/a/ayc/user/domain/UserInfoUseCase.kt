@@ -9,6 +9,6 @@ class UserInfoUseCase @Inject constructor(
     private val homeRemote: HomeRemote
 ) {
 
-    fun setUserInfo(name: String) = userRemote.setUserInfo(name)
+    fun setUserInfo(name: String , username : String) = userRemote.setUserInfo(name , username)
 
 }

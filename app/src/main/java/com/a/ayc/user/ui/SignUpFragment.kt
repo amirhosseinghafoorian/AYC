@@ -35,7 +35,7 @@ class SignUpFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                signUpViewModel.setUserInfo(signUp_et_4.editText?.text.toString())
+                signUpViewModel.setUserInfo(signUp_et_4.editText?.text.toString() , signUp_et_1.editText?.text.toString())
                 findNavController().navigate(SignUpFragmentDirections.actionGlobalHomeFragment())
             }
         })

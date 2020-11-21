@@ -41,6 +41,6 @@ class SignUpViewModel
 
     fun logout() = signUpUseCase.logout()
 
-    fun setUserInfo(name: String) = userInfoUseCase.setUserInfo(name)
+    fun setUserInfo(name: String , username : String) = userInfoUseCase.setUserInfo(name , username)
 
 }
