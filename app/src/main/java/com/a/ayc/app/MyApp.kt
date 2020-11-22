@@ -1,6 +1,7 @@
-package com.a.ayc
+package com.a.ayc.app
 
 import android.app.Application
+import com.a.ayc.BuildConfig
 import com.facebook.flipper.android.AndroidFlipperClient
 import com.facebook.flipper.android.utils.FlipperUtils
 import com.facebook.flipper.plugins.databases.DatabasesFlipperPlugin

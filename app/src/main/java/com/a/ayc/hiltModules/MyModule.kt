@@ -1,4 +1,4 @@
-package com.a.ayc
+package com.a.ayc.hiltModules
 
 import com.a.domainmodule.inputValidation.ValidateInput
 import com.google.firebase.auth.FirebaseAuth
