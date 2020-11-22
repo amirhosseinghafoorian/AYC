@@ -1,6 +1,7 @@
 package com.a.ayc.home.ui
 
 import android.os.Bundle
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,9 +26,12 @@ class SplashFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (homeViewModel.currentUser() == null) findNavController().navigate(
-            SplashFragmentDirections.actionSplashFragmentToNavigation()
-        )
-        else findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+        val handler = Handler()
+        handler.postDelayed({
+            if (homeViewModel.currentUser() == null) findNavController().navigate(
+                SplashFragmentDirections.actionSplashFragmentToNavigation()
+            )
+            else findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+        }, 3000)
     }
 }
