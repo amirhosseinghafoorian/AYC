@@ -1,18 +1,17 @@
 package com.a.ayc.home.ui
 
 import android.os.Bundle
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_home_tab1.*
 
 @AndroidEntryPoint
-class SplashFragment : Fragment() {
+class HomeFragmentTab1 : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
 
@@ -20,18 +19,17 @@ class SplashFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_splash, container, false)
+        return inflater.inflate(R.layout.fragment_home_tab1, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val handler = Handler()
-        handler.postDelayed({
-            if (homeViewModel.currentUser() == null) findNavController().navigate(
-                SplashFragmentDirections.actionSplashFragmentToNavigation()
-            )
-            else findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
-        }, 3000)
+        homeViewModel.name.observe(viewLifecycleOwner, { name ->
+            if (name != null) tv_home_2.text = name
+        })
+
+        homeViewModel.getUserInfo()
+
     }
 }

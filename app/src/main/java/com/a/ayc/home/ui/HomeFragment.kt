@@ -8,7 +8,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.viewpager2.widget.ViewPager2
 import com.a.ayc.R
+import com.google.android.material.tabs.TabLayout
+import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home.*
 
@@ -24,18 +27,32 @@ class HomeFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
+        homeViewPagerInit()
+    }
+
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeViewModel.name.observe(viewLifecycleOwner, { name ->
-            if (name != null) tv_home_2.text = name
-        })
-
-        homeViewModel.getUserInfo()
-
-        btn_home_1.setOnClickListener {
+        btn_logout.setOnClickListener {
             showLogoutDialog()
         }
+
+    }
+
+    private fun homeViewPagerInit() {
+        val viewPagerAdapter = HomeViewPagerAdapter(childFragmentManager, lifecycle)
+        viewPagerAdapter.addFragment(HomeFragmentTab1(), "Messages")
+        viewPagerAdapter.addFragment(HomeFragmentTab2(), "Users")
+        home_view_pager.adapter = viewPagerAdapter
+        home_view_pager.isUserInputEnabled = false
+        TabLayoutMediator(
+            (home_page_TL as TabLayout),
+            (home_view_pager as ViewPager2)
+        ) { tab, position ->
+            tab.text = viewPagerAdapter.getName(position)
+        }.attach()
     }
 
     private fun showLogoutDialog() {
