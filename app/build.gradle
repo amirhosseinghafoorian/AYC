@@ -48,7 +48,6 @@ android {
 dependencies {
     //      Modules
     implementation project(path: ':DomainModule')
-    implementation project(path: ':AuthenticationModule')
     implementation project(path: ':RemoteModule')
 
     def nav_version = "2.3.0"
