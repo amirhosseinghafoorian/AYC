@@ -40,4 +40,29 @@ class ValidateInput {
         return true
     }
 
+    fun checkTheSamePassword(password: String, repeatPassword: String): Boolean {
+        return if (password == repeatPassword) true
+        else {
+            Toast.makeText(MyApp.publicApp, "passwords don't match", Toast.LENGTH_SHORT).show()
+            false
+        }
+    }
+
+    fun checkNameValidation(name: String): Boolean {
+        if (name.isEmpty()) {
+            Toast.makeText(MyApp.publicApp, "Name can not be empty", Toast.LENGTH_SHORT)
+                .show()
+            return false
+        } else if (name.length < 4) {
+            Toast.makeText(
+                MyApp.publicApp,
+                "Enter a name with at least 4 characters",
+                Toast.LENGTH_SHORT
+            )
+                .show()
+            return false
+        }
+        return true
+    }
+
 }

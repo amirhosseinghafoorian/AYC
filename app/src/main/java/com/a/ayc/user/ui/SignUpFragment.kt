@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_sign_up.*
@@ -28,20 +29,23 @@ class SignUpFragment : Fragment() {
 
         signUpViewModel.currentUser.observe(viewLifecycleOwner, { result ->
             if (result == null || result.exception?.message != null) {
-                Toast.makeText(requireContext(), "failed", Toast.LENGTH_SHORT).show()
-            } else {
                 Toast.makeText(
                     requireContext(),
-                    "navigated : ${result.result!!.user!!.uid}",
+                    "Failed : ${result.exception?.message}",
                     Toast.LENGTH_SHORT
                 ).show()
+            } else {
+                signUpViewModel.setUserInfo(signUp_et_4.editText?.text.toString() , signUp_et_1.editText?.text.toString())
+                findNavController().navigate(SignUpFragmentDirections.actionGlobalHomeFragment())
             }
         })
 
         btn_sign_up.setOnClickListener {
-            val email = signUp_et_2.editText?.text.toString()
-            val password = signUp_et_3.editText?.text.toString()
-            if (validateInputs(email, password)) {
+            val email = signUp_et_1.editText?.text.toString()
+            val password = signUp_et_2.editText?.text.toString()
+            val repeatPassword = signUp_et_3.editText?.text.toString()
+            val name = signUp_et_4.editText?.text.toString()
+            if (validateInputs(email, password, repeatPassword, name)) {
                 signUpViewModel.signUp(email, password)
             }
         }
@@ -49,8 +53,13 @@ class SignUpFragment : Fragment() {
 
     private fun validateInputs(
         email: String,
-        password: String
-    ) = signUpViewModel.validateEmail(email) &&
-            signUpViewModel.validatePassword(password)
+        password: String,
+        repeatPassword: String,
+        name: String
+    ) = signUpViewModel.validateName(name) &&
+            signUpViewModel.validateEmail(email) &&
+            signUpViewModel.validatePassword(password) &&
+            signUpViewModel.validateTheSamePassword(password, repeatPassword)
+
 
 }

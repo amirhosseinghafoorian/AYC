@@ -11,9 +11,13 @@
         android:label="fragment_splash"
         tools:layout="@layout/fragment_splash">
         <action
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
             android:id="@+id/action_splashFragment_to_navigation"
             app:destination="@id/authentication" />
         <action
+            app:popUpTo="@id/splashFragment"
+            app:popUpToInclusive="true"
             android:id="@+id/action_splashFragment_to_homeFragment"
             app:destination="@id/homeFragment" />
     </fragment>
@@ -43,6 +47,8 @@
             android:label="fragment_sign_up"
             tools:layout="@layout/fragment_sign_up" />
         <action
+            app:popUpTo="@id/authentication"
+            app:popUpToInclusive="true"
             android:id="@+id/action_global_homeFragment"
             app:destination="@id/homeFragment" />
     </navigation>
@@ -57,6 +63,11 @@
         <action
             android:id="@+id/action_homeFragment_to_chatFragment"
             app:destination="@id/chatFragment" />
+        <action
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true"
+            android:id="@+id/action_homeFragment_to_authentication"
+            app:destination="@id/authentication" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"

@@ -68,7 +68,7 @@ dependencies {
 
     //      Firebase
     implementation 'com.google.firebase:firebase-auth:20.0.1'
-    compile 'com.google.firebase:firebase-auth:20.0.1'
+    implementation 'com.google.firebase:firebase-database:19.5.1'
 
     //      ViewModel
     implementation "androidx.lifecycle:lifecycle-viewmodel-ktx:2.2.0"
