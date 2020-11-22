@@ -3,8 +3,8 @@ package com.a.ayc.home.ui
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.a.ayc.user.domain.SignUpUseCase
-import com.a.ayc.user.domain.UserInfoUseCase
+import com.a.domainmodule.domain.SignUpUseCase
+import com.a.domainmodule.domain.UserInfoUseCase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -12,8 +12,8 @@ import com.google.firebase.database.ValueEventListener
 
 class HomeViewModel
 @ViewModelInject constructor(
-    private val signUpUseCase: SignUpUseCase ,
-    private val userInfoUseCase: UserInfoUseCase ,
+    private val signUpUseCase: SignUpUseCase,
+    private val userInfoUseCase: UserInfoUseCase,
 ) : ViewModel() {
 
     val name = MutableLiveData<String>()

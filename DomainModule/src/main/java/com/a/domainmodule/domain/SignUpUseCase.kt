@@ -1,8 +1,8 @@
-package com.a.ayc.user.domain
+package com.a.domainmodule.domain
 
-import com.a.ayc.home.data.HomeRemote
-import com.a.ayc.user.data.UserRemote
-import com.a.ayc.user.data.ValidateInput
+import com.a.domainmodule.inputValidation.ValidateInput
+import com.a.remotemodule.HomeRemote
+import com.a.remotemodule.UserRemote
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseUser

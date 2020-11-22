@@ -1,4 +1,4 @@
-package com.a.ayc.home.data
+package com.a.remotemodule
 
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseUser

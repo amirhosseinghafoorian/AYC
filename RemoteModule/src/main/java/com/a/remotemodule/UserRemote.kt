@@ -1,4 +1,4 @@
-package com.a.ayc.user.data
+package com.a.remotemodule
 
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult

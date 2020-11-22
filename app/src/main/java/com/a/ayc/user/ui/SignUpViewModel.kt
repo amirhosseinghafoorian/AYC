@@ -3,8 +3,8 @@ package com.a.ayc.user.ui
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.a.ayc.user.domain.SignUpUseCase
-import com.a.ayc.user.domain.UserInfoUseCase
+import com.a.domainmodule.domain.SignUpUseCase
+import com.a.domainmodule.domain.UserInfoUseCase
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 

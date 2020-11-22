@@ -1,7 +1,7 @@
-package com.a.ayc.user.domain
+package com.a.domainmodule.domain
 
-import com.a.ayc.home.data.HomeRemote
-import com.a.ayc.user.data.UserRemote
+import com.a.remotemodule.HomeRemote
+import com.a.remotemodule.UserRemote
 import javax.inject.Inject
 
 class UserInfoUseCase @Inject constructor(
