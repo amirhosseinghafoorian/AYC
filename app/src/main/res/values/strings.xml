@@ -9,4 +9,5 @@
     <string name="full_name">Full Name</string>
     <string name="log_out">Log out</string>
     <string name="repeat_password">Repeat password</string>
+    <string name="ay_chat">AY Chat</string>
 </resources>

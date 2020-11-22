@@ -7,8 +7,10 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.a.ayc.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home_tab1.*
 
+@AndroidEntryPoint
 class HomeFragmentTab1 : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
