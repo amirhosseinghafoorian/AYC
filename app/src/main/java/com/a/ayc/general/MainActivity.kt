@@ -1,7 +1,8 @@
-package com.a.ayc
+package com.a.ayc.general
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.a.ayc.R
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

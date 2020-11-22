@@ -11,6 +11,9 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/AuthenticationModule" />
+            <option value="$PROJECT_DIR$/DomainModule" />
+            <option value="$PROJECT_DIR$/RemoteModule" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

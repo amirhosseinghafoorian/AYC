@@ -1,12 +1,7 @@
-package com.a.ayc
-
-
-
+package com.a.ayc.general
 
 import androidx.lifecycle.MutableLiveData
-import retrofit2.HttpException
-import java.io.IOException
-import com.a.ayc.Resource.*
+import com.a.ayc.general.Resource.*
 
 /**
  * A generic class that holds a value with its loading status.

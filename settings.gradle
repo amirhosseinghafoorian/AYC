@@ -1,2 +1,5 @@
+include ':RemoteModule'
+include ':DomainModule'
+include ':AuthenticationModule'
 include ':app'
 rootProject.name = "AYC"
