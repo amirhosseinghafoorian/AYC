@@ -15,7 +15,8 @@ class ChatViewModel @ViewModelInject constructor(
     private val allUsersUseCase: AllUsersUseCase
 ) : ViewModel() {
 
-    val receiverUsername = MutableLiveData<String>()
+    var receiverUsername = MutableLiveData<String>()
+    var isInDirect = MutableLiveData<Boolean>()
 
     fun currentUser(): FirebaseUser? = signUpUseCase.currentUser()
 
@@ -35,9 +36,11 @@ class ChatViewModel @ViewModelInject constructor(
         allUsersUseCase.userDirect(currentUser()?.uid.toString())
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var result = false
                     dataSnapshot.children.forEach {
-
+                        if (it.key.toString() == id) result = true
                     }
+                    isInDirect.postValue(result)
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {}

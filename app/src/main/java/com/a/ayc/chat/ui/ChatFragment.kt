@@ -57,13 +57,19 @@ class ChatFragment : Fragment() {
             }
         })
 
+        chatViewModel.isInDirect.observe(viewLifecycleOwner , {
+            if (it != null){
+                if(it){
+                    // create a new chat
+                }else{
+                    // open existing chat
+                }
+            }
+        })
+
         chatViewModel.usernameFromUid(messageReceiver)
         // chat id decider
-        if(true){
-            // create a new chat
-        }else{
-            // open existing chat
-        }
+        chatViewModel.isUserInDirect(messageReceiver)
 
     }
 }
