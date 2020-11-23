@@ -59,11 +59,13 @@ class ChatFragment : Fragment() {
 
         chatViewModel.isInDirect.observe(viewLifecycleOwner, {
             if (it != null) {
-                chatViewModel.chatIdDecide(messageReceiver)
+                val chatId = chatViewModel.chatIdDecide(messageReceiver)
                 if (it) {
-                    // create a new chat
-                } else {
                     // open existing chat
+                } else {
+                    chatViewModel.createChatRoom(chatId)
+                    chatViewModel.putChatInDirect(messageReceiver, messageSender)
+                    chatViewModel.putChatInDirect(messageSender, messageReceiver)
                 }
             }
         })

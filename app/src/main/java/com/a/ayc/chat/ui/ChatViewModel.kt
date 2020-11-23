@@ -4,6 +4,7 @@ import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.a.domainmodule.domain.AllUsersUseCase
+import com.a.domainmodule.domain.ChatUseCase
 import com.a.domainmodule.domain.SignUpUseCase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
@@ -12,6 +13,7 @@ import com.google.firebase.database.ValueEventListener
 
 class ChatViewModel @ViewModelInject constructor(
     private val signUpUseCase: SignUpUseCase,
+    private val chatUseCase: ChatUseCase,
     private val allUsersUseCase: AllUsersUseCase
 ) : ViewModel() {
 
@@ -50,4 +52,7 @@ class ChatViewModel @ViewModelInject constructor(
     fun chatIdDecide(receiverId: String) =
         allUsersUseCase.chatIdDecide(currentUser()?.uid.toString(), receiverId)
 
+    fun createChatRoom(name: String) = chatUseCase.createChatRoom(name)
+
+    fun putChatInDirect(base : String , target : String) = allUsersUseCase.putChatInDirect(base , target)
 }

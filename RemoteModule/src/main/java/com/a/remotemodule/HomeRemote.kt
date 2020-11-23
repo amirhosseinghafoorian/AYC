@@ -41,4 +41,12 @@ class HomeRemote
             .child("Directs")
     }
 
+    fun putChatInDirect(base : String , target : String){
+        rootReference
+            .child("Users")
+            .child(base)
+            .child("Directs")
+            .child(target).setValue("")
+    }
+
 }
