@@ -1,5 +1,6 @@
 package com.a.ayc.hiltModules
 
+import com.a.domainmodule.inputValidation.ChatIdDecider
 import com.a.domainmodule.inputValidation.ValidateInput
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
@@ -18,6 +19,12 @@ object MyModule {
     @Provides
     fun provideValidation(): ValidateInput {
         return ValidateInput()
+    }
+
+    @Singleton
+    @Provides
+    fun provideChatIdDecider(): ChatIdDecider {
+        return ChatIdDecider()
     }
 
     @Singleton

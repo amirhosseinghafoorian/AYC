@@ -28,7 +28,7 @@ class ChatFragment : Fragment() {
         messageReceiver =
             arguments?.let { ChatFragmentArgs.fromBundle(it).messageReceiver }.toString()
 
-        messageSender = chatViewModel.currentUser()?.email.toString()
+        messageSender = chatViewModel.currentUser()?.uid.toString()
 
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
@@ -57,18 +57,18 @@ class ChatFragment : Fragment() {
             }
         })
 
-        chatViewModel.isInDirect.observe(viewLifecycleOwner , {
-            if (it != null){
-                if(it){
+        chatViewModel.isInDirect.observe(viewLifecycleOwner, {
+            if (it != null) {
+                chatViewModel.chatIdDecide(messageReceiver)
+                if (it) {
                     // create a new chat
-                }else{
+                } else {
                     // open existing chat
                 }
             }
         })
 
         chatViewModel.usernameFromUid(messageReceiver)
-        // chat id decider
         chatViewModel.isUserInDirect(messageReceiver)
 
     }

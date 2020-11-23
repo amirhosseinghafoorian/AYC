@@ -46,4 +46,8 @@ class ChatViewModel @ViewModelInject constructor(
                 override fun onCancelled(databaseError: DatabaseError) {}
             })
     }
+
+    fun chatIdDecide(receiverId: String) =
+        allUsersUseCase.chatIdDecide(currentUser()?.uid.toString(), receiverId)
+
 }
