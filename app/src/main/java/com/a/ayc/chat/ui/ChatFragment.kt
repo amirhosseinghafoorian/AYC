@@ -14,12 +14,13 @@ import com.a.ayc.databinding.FragmentChatBinding
 class ChatFragment : Fragment() {
 
     private lateinit var binding: FragmentChatBinding
-    private lateinit var messageReceiver : String
+    private lateinit var messageReceiver: String
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        messageReceiver = arguments?.let { ChatFragmentArgs.fromBundle(it).messageReceiver }.toString()
+        messageReceiver =
+            arguments?.let { ChatFragmentArgs.fromBundle(it).messageReceiver }.toString()
 
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
