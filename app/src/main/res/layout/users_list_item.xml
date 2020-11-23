@@ -9,19 +9,36 @@
 
     </data>
 
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="4dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="4dp"
+        android:backgroundTint="@android:color/black"
+        android:checkable="true"
+        android:clickable="true"
+        android:focusable="true"
+        android:layoutDirection="rtl"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
+        app:rippleColor="@android:color/white">
+
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_margin="8dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_margin="4dp"
-            android:textColor="@android:color/black"
+            android:layout_margin="8dp"
+            android:textColor="@android:color/white"
             android:textSize="24sp"
             android:text="@{name}"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:layout_height="match_parent" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
 </layout>
