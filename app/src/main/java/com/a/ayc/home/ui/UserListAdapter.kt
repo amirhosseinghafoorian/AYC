@@ -20,7 +20,7 @@ class UserListAdapter(
 
             itemView.setOnClickListener {
                 try {
-                    it.findNavController()
+                    it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatFragment())
                 } catch (e: Exception) {
                 }
             }
