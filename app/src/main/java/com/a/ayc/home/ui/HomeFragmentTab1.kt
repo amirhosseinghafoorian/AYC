@@ -1,5 +1,6 @@
 package com.a.ayc.home.ui
 
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -26,9 +27,12 @@ class HomeFragmentTab1 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         homeViewModel.name.observe(viewLifecycleOwner, { name ->
-            if (name != null) tv_home_2.text = name
+            if (name != null) {
+                directs_progress_bar.visibility = View.GONE
+                tv_home_2.text = name
+            }
         })
-
+        directs_progress_bar.visibility = View.VISIBLE
         homeViewModel.getUserInfo()
 
     }

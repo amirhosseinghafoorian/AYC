@@ -1,13 +1,15 @@
 package com.a.ayc.home.ui
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
 import com.a.ayc.R
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_home_tab2.*
 
+@AndroidEntryPoint
 class HomeFragmentTab2 : Fragment() {
 
     override fun onCreateView(
@@ -21,7 +23,7 @@ class HomeFragmentTab2 : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val users = mutableListOf<String>()
-        repeat(100){
+        repeat(100) {
             users.add("user : $it")
         }
 
