@@ -81,6 +81,9 @@
         android:name="com.a.ayc.chat.ui.ChatFragment"
         android:label="fragment_chat"
         tools:layout="@layout/fragment_chat" >
+        <argument
+            android:name="message_receiver"
+            app:argType="string" />
         <action
             app:popUpTo="@id/chatFragment"
             app:popUpToInclusive="true"

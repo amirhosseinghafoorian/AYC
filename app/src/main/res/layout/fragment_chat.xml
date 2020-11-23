@@ -1,13 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    tools:context=".chat.ui.ChatFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <TextView
+    <data>
+        <variable
+            name="username"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        tools:context=".chat.ui.ChatFragment">
 
-</FrameLayout>
+        <com.google.android.material.appbar.MaterialToolbar
+            android:layout_marginTop="2dp"
+            android:id="@+id/tool_bar_chat"
+            style="@style/Widget.MaterialComponents.Toolbar.Primary"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/btn_logout"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_gravity="end"
+                android:layout_marginEnd="16dp"
+                android:textColor="@android:color/white"
+                android:gravity="center"
+                android:textSize="20sp"
+                android:text="@{username}" />
+
+        </com.google.android.material.appbar.MaterialToolbar>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

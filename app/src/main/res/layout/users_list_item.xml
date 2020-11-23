@@ -4,8 +4,8 @@
 
     <data>
         <variable
-            name="name"
-            type="String" />
+            name="data"
+            type="com.a.ayc.model.UserModel" />
 
     </data>
 
@@ -31,12 +31,24 @@
         android:layout_height="wrap_content">
 
         <com.google.android.material.textview.MaterialTextView
-            android:layout_margin="8dp"
+            android:textStyle="bold"
+            android:id="@+id/users_list_username_tv"
+            app:layout_constraintTop_toTopOf="parent"
+            android:layout_margin="4dp"
             android:textColor="@android:color/white"
             android:textSize="24sp"
-            android:text="@{name}"
+            android:text="@{data.username}"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="wrap_content" />
+
+        <com.google.android.material.textview.MaterialTextView
+            app:layout_constraintTop_toBottomOf="@id/users_list_username_tv"
+            android:layout_margin="4dp"
+            android:textColor="@android:color/white"
+            android:textSize="16sp"
+            android:text="@{data.name}"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -33,8 +33,8 @@ class HomeFragmentTab2 : Fragment() {
             adapter = myAdapter
         }
 
-        homeViewModel.usersList.observe(viewLifecycleOwner , {list ->
-            if (list != null){
+        homeViewModel.usersList.observe(viewLifecycleOwner, { list ->
+            if (list != null) {
                 users_progress_bar.visibility = View.GONE
                 myAdapter?.list = list
                 myAdapter?.notifyDataSetChanged()

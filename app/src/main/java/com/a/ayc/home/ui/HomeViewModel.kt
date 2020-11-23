@@ -3,6 +3,7 @@ package com.a.ayc.home.ui
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import com.a.ayc.model.UserModel
 import com.a.domainmodule.domain.AllUsersUseCase
 import com.a.domainmodule.domain.SignUpUseCase
 import com.a.domainmodule.domain.UserInfoUseCase
@@ -19,7 +20,7 @@ class HomeViewModel
 ) : ViewModel() {
 
     val name = MutableLiveData<String>()
-    var usersList = MutableLiveData<MutableList<String>>()
+    var usersList = MutableLiveData<MutableList<UserModel>>()
 
     init {
         usersList.value = mutableListOf()
@@ -44,12 +45,18 @@ class HomeViewModel
         allUsersUseCase.getUsersList()
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val result = mutableListOf<String>()
+                    val result = mutableListOf<UserModel>()
                     snapshot.children.forEach {
                         val value = it.child("Username").value.toString()
                         if (value.startsWith(text))
                             if (value != currentUser()?.email)
-                                result.add(value)
+                                result.add(
+                                    UserModel(
+                                        it.key.toString(),
+                                        value,
+                                        it.child("Name").value.toString()
+                                    )
+                                )
                     }
                     usersList.postValue(result)
                 }

@@ -7,10 +7,10 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.a.ayc.R
 import com.a.ayc.databinding.UsersListItemBinding
-
+import com.a.ayc.model.UserModel
 
 class UserListAdapter(
-    var list: MutableList<String>
+    var list: MutableList<UserModel>
 ) :
     RecyclerView.Adapter<UserListAdapter.MyViewHolder>() {
 
@@ -20,7 +20,11 @@ class UserListAdapter(
 
             itemView.setOnClickListener {
                 try {
-                    it.findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatFragment())
+                    it.findNavController().navigate(
+                        HomeFragmentDirections.actionHomeFragmentToChatFragment(
+                            list[position].id
+                        )
+                    )
                 } catch (e: Exception) {
                 }
             }
@@ -39,7 +43,7 @@ class UserListAdapter(
     override fun getItemCount() = list.size
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.name = list[position]
+        holder.binding.data = list[position]
     }
 
 }
