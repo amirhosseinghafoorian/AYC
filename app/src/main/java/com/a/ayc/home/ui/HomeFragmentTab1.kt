@@ -31,6 +31,7 @@ class HomeFragmentTab1 : Fragment() {
                 tv_home_2.text = name
             }
         })
+
         directs_progress_bar.visibility = View.VISIBLE
         homeViewModel.getUserInfo()
 

@@ -27,4 +27,18 @@ class HomeRemote
             .child("Users")
     }
 
+    fun usernameFromUid(uid : String) : DatabaseReference {
+        return rootReference
+            .child("Users")
+            .child(uid)
+            .child("Username")
+    }
+
+    fun userDirect(uid : String) : DatabaseReference{
+        return rootReference
+            .child("Users")
+            .child(uid)
+            .child("Directs")
+    }
+
 }

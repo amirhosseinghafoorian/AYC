@@ -9,4 +9,8 @@ class AllUsersUseCase @Inject constructor(
 
     fun getUsersList() = homeRemote.getUsersList()
 
+    fun usernameFromUid(uid : String) = homeRemote.usernameFromUid(uid)
+
+    fun userDirect(uid : String) = homeRemote.userDirect(uid)
+
 }
