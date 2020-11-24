@@ -43,8 +43,11 @@ class HomeFragmentTab2 : Fragment() {
 
         home_page_search_user.editText?.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
-                users_progress_bar.visibility = View.VISIBLE
-                homeViewModel.getUsersList(s.toString())
+                // Todo here should be uncommented for the release
+//                if (s.toString() != "") {
+                    users_progress_bar.visibility = View.VISIBLE
+                    homeViewModel.getUsersList(s.toString())
+//                }
             }
 
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {

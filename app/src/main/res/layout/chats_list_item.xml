@@ -13,7 +13,7 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="1dp"
         android:backgroundTint="@android:color/black"
         android:checkable="true"
         android:clickable="true"
@@ -27,6 +27,7 @@
             android:layout_margin="8dp">
 
             <com.google.android.material.textview.MaterialTextView
+                android:gravity="center"
                 android:id="@+id/users_list_username_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -38,6 +39,7 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"

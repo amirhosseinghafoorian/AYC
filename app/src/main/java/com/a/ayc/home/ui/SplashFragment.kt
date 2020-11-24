@@ -32,7 +32,7 @@ class SplashFragment : Fragment() {
             if (homeViewModel.currentUser() == null) findNavController().navigate(
                 SplashFragmentDirections.actionSplashFragmentToNavigation()
             )
-            else findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment())
+            else findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment("splash"))
         }, 1000)
     }
 }

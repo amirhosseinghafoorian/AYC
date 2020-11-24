@@ -37,7 +37,7 @@ class HomeViewModel
                     snapshot.children.forEach {
                         val value = it.child("Username").value.toString()
                         if (value.startsWith(text))
-                            if (value != currentUser()?.email)
+                            if ("$value@gmail.com" != currentUser()?.email)
                                 result.add(
                                     UserModel(
                                         it.key.toString(),
@@ -59,20 +59,39 @@ class HomeViewModel
         allUsersUseCase.userDirect(cUid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    var conditionItem = ""
                     val result = mutableListOf<UserModel>()
+                    val count = dataSnapshot.childrenCount
+                    var counter = 1L
                     dataSnapshot.children.forEach {
-                        result.add(
-                            UserModel(
-                                it.key.toString(),
-                                it.child("Username").value.toString(),
-                                it.child("Name").value.toString()
-                            )
-                        )
+                        allUsersUseCase.getUserInfo(it.key.toString())
+                            .addListenerForSingleValueEvent(object : ValueEventListener {
+                                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                    val currentModel = UserModel(
+                                        it.key.toString(),
+                                        dataSnapshot.value.toString(),
+                                        ""
+                                    )
+                                    result.add(
+                                        currentModel
+                                    )
+                                    if (currentModel.id == conditionItem) getChatsListHelper(result)
+                                }
+
+                                override fun onCancelled(databaseError: DatabaseError) {}
+                            })
+                        if (counter == count) {
+                            conditionItem = it.key.toString()
+                        } else counter++
                     }
-                    chatsList.postValue(result)
+
                 }
 
                 override fun onCancelled(databaseError: DatabaseError) {}
             })
+    }
+
+    fun getChatsListHelper(list: MutableList<UserModel>) {
+        chatsList.postValue(list)
     }
 }

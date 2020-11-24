@@ -20,4 +20,6 @@ class AllUsersUseCase @Inject constructor(
 
     fun putChatInDirect(base: String, target: String) = homeRemote.putChatInDirect(base, target)
 
+    fun getUserInfo(uid : String) = homeRemote.getUserInfo(uid)
+
 }
