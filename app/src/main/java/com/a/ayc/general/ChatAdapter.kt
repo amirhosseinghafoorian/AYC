@@ -10,7 +10,7 @@ import com.a.ayc.databinding.SentItemBinding
 import com.a.ayc.model.MessageModel
 
 
-class TestAdapter(
+class ChatAdapter(
 
     var list: MutableList<MessageModel>
 ) :

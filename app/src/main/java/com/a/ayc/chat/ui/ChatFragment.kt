@@ -11,13 +11,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import com.a.ayc.databinding.FragmentChatBinding
+import com.a.ayc.general.ChatAdapter
 import com.a.ayc.general.MessageType
-import com.a.ayc.general.TestAdapter
-import com.a.ayc.home.ui.ChatListAdapter
 import com.a.ayc.model.MessageModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_chat.*
-import kotlinx.android.synthetic.main.fragment_home_tab1.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ChatFragment : Fragment() {
@@ -25,7 +27,7 @@ class ChatFragment : Fragment() {
     private lateinit var binding: FragmentChatBinding
     private lateinit var messageReceiver: String
     private lateinit var messageSender: String
-    private lateinit var myAdapter: TestAdapter
+    private lateinit var myAdapter: ChatAdapter
 
     private val chatViewModel: ChatViewModel by viewModels()
 
@@ -40,7 +42,11 @@ class ChatFragment : Fragment() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(ChatFragmentDirections.actionChatFragmentToHomeFragment("chat"))
+                    findNavController().navigate(
+                        ChatFragmentDirections.actionChatFragmentToHomeFragment(
+                            "chat"
+                        )
+                    )
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
@@ -81,35 +87,50 @@ class ChatFragment : Fragment() {
         chatViewModel.isUserInDirect(chatViewModel.currentUser()?.uid.toString(), messageReceiver)
 
         val list = mutableListOf<MessageModel>()
-        repeat(50) {
-            list.add(
-                MessageModel(
-                    it.toString(),
-                    "message : $it",
-                    MessageType.SENT
-                )
-            )
-        }
 
-        repeat(50) {
-            list.add(
-                MessageModel(
-                    it.toString(),
-                    "message : $it",
-                    MessageType.RECEIVED
-                )
-            )
-        }
-
-        list.shuffle()
-        list.shuffle()
-        list.shuffle()
-
-        myAdapter = TestAdapter(list)
+        myAdapter = ChatAdapter(list)
 
         chat_recycler.apply {
             adapter = myAdapter
         }
+
+        CoroutineScope(Dispatchers.Main).launch {
+
+            repeat(20) {
+
+                list.add(
+                    MessageModel(
+                        it.toString(),
+                        "message : $it",
+                        MessageType.RECEIVED
+                    )
+                )
+
+                myAdapter.list = list
+                myAdapter.notifyItemInserted(list.size)
+
+                delay(500)
+
+                chat_recycler.scrollToPosition(list.size)  // we have crash here
+
+                list.add(
+                    MessageModel(
+                        it.toString(),
+                        "message : $it",
+                        MessageType.SENT
+                    )
+                )
+
+                myAdapter.list = list
+                myAdapter.notifyItemInserted(list.size)
+
+                delay(500)
+
+                chat_recycler.scrollToPosition(list.size)
+            }
+
+        }
+
 
     }
 }
