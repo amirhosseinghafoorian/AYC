@@ -11,7 +11,15 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import com.a.ayc.databinding.FragmentChatBinding
+import com.a.ayc.general.ChatAdapter
+import com.a.ayc.general.MessageType
+import com.a.ayc.model.MessageModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_chat.*
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ChatFragment : Fragment() {
@@ -19,6 +27,7 @@ class ChatFragment : Fragment() {
     private lateinit var binding: FragmentChatBinding
     private lateinit var messageReceiver: String
     private lateinit var messageSender: String
+    private lateinit var myAdapter: ChatAdapter
 
     private val chatViewModel: ChatViewModel by viewModels()
 
@@ -33,7 +42,11 @@ class ChatFragment : Fragment() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(ChatFragmentDirections.actionChatFragmentToHomeFragment("chat"))
+                    findNavController().navigate(
+                        ChatFragmentDirections.actionChatFragmentToHomeFragment(
+                            "chat"
+                        )
+                    )
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
@@ -72,6 +85,52 @@ class ChatFragment : Fragment() {
 
         chatViewModel.usernameFromUid(messageReceiver)
         chatViewModel.isUserInDirect(chatViewModel.currentUser()?.uid.toString(), messageReceiver)
+
+        val list = mutableListOf<MessageModel>()
+
+        myAdapter = ChatAdapter(list)
+
+        chat_recycler.apply {
+            adapter = myAdapter
+        }
+
+        CoroutineScope(Dispatchers.Main).launch {
+
+            repeat(20) {
+
+                list.add(
+                    MessageModel(
+                        it.toString(),
+                        "message : $it",
+                        MessageType.RECEIVED
+                    )
+                )
+
+                myAdapter.list = list
+                myAdapter.notifyItemInserted(list.size)
+
+                delay(500)
+
+                chat_recycler.scrollToPosition(list.size)  // we have crash here
+
+                list.add(
+                    MessageModel(
+                        it.toString(),
+                        "message : $it",
+                        MessageType.SENT
+                    )
+                )
+
+                myAdapter.list = list
+                myAdapter.notifyItemInserted(list.size)
+
+                delay(500)
+
+                chat_recycler.scrollToPosition(list.size)
+            }
+
+        }
+
 
     }
 }
