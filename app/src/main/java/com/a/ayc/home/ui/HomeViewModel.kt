@@ -6,7 +6,6 @@ import androidx.lifecycle.ViewModel
 import com.a.ayc.model.UserModel
 import com.a.domainmodule.domain.AllUsersUseCase
 import com.a.domainmodule.domain.SignUpUseCase
-import com.a.domainmodule.domain.UserInfoUseCase
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -15,31 +14,20 @@ import com.google.firebase.database.ValueEventListener
 class HomeViewModel
 @ViewModelInject constructor(
     private val signUpUseCase: SignUpUseCase,
-    private val userInfoUseCase: UserInfoUseCase,
     private val allUsersUseCase: AllUsersUseCase
 ) : ViewModel() {
 
-    val name = MutableLiveData<String>()
     var usersList = MutableLiveData<MutableList<UserModel>>()
+    var chatsList = MutableLiveData<MutableList<UserModel>>()
 
     init {
         usersList.value = mutableListOf()
+        chatsList.value = mutableListOf()
     }
 
     fun currentUser(): FirebaseUser? = signUpUseCase.currentUser()
 
     fun logout() = signUpUseCase.logout()
-
-    fun getUserInfo() {
-        userInfoUseCase.getUserInfo()
-            .addListenerForSingleValueEvent(object : ValueEventListener {
-                override fun onDataChange(dataSnapshot: DataSnapshot) {
-                    name.postValue(dataSnapshot.value.toString())
-                }
-
-                override fun onCancelled(databaseError: DatabaseError) {}
-            })
-    }
 
     fun getUsersList(text: String) {
         allUsersUseCase.getUsersList()
@@ -67,4 +55,24 @@ class HomeViewModel
             })
     }
 
+    fun getChatsList(cUid: String) {
+        allUsersUseCase.userDirect(cUid)
+            .addListenerForSingleValueEvent(object : ValueEventListener {
+                override fun onDataChange(dataSnapshot: DataSnapshot) {
+                    val result = mutableListOf<UserModel>()
+                    dataSnapshot.children.forEach {
+                        result.add(
+                            UserModel(
+                                it.key.toString(),
+                                it.child("Username").value.toString(),
+                                it.child("Name").value.toString()
+                            )
+                        )
+                    }
+                    chatsList.postValue(result)
+                }
+
+                override fun onCancelled(databaseError: DatabaseError) {}
+            })
+    }
 }

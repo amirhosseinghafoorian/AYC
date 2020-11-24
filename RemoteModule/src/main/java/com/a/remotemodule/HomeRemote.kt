@@ -15,13 +15,6 @@ class HomeRemote
 
     fun logout() = auth.signOut()
 
-    fun getUserInfo(): DatabaseReference {
-        return rootReference
-            .child("Users")
-            .child(auth.currentUser?.uid.toString())
-            .child("Name")
-    }
-
     fun getUsersList(): DatabaseReference {
         return rootReference
             .child("Users")

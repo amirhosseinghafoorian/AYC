@@ -71,7 +71,7 @@ class ChatFragment : Fragment() {
         })
 
         chatViewModel.usernameFromUid(messageReceiver)
-        chatViewModel.isUserInDirect(messageReceiver)
+        chatViewModel.isUserInDirect(chatViewModel.currentUser()?.uid.toString(), messageReceiver)
 
     }
 }

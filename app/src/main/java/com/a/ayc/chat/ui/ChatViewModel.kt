@@ -34,13 +34,13 @@ class ChatViewModel @ViewModelInject constructor(
 
     }
 
-    fun isUserInDirect(id: String) {
-        allUsersUseCase.userDirect(currentUser()?.uid.toString())
+    fun isUserInDirect(cUid: String, uid: String) {
+        allUsersUseCase.userDirect(cUid)
             .addListenerForSingleValueEvent(object : ValueEventListener {
                 override fun onDataChange(dataSnapshot: DataSnapshot) {
                     var result = false
                     dataSnapshot.children.forEach {
-                        if (it.key.toString() == id) result = true
+                        if (it.key.toString() == uid) result = true
                     }
                     isInDirect.postValue(result)
                 }
@@ -54,5 +54,6 @@ class ChatViewModel @ViewModelInject constructor(
 
     fun createChatRoom(name: String) = chatUseCase.createChatRoom(name)
 
-    fun putChatInDirect(base : String , target : String) = allUsersUseCase.putChatInDirect(base , target)
+    fun putChatInDirect(base: String, target: String) =
+        allUsersUseCase.putChatInDirect(base, target)
 }

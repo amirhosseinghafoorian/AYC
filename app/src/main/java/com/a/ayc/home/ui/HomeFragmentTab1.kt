@@ -13,10 +13,8 @@ import kotlinx.android.synthetic.main.fragment_home_tab1.*
 @AndroidEntryPoint
 class HomeFragmentTab1 : Fragment() {
 
-    //      directs can be brought by isInDirect in chatViewModel
-
     private val homeViewModel: HomeViewModel by viewModels()
-    private var myAdapter: ChatListAdapter? = null
+    private lateinit var myAdapter: ChatListAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -28,15 +26,25 @@ class HomeFragmentTab1 : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        homeViewModel.name.observe(viewLifecycleOwner, { name ->
-            if (name != null) {
-                directs_progress_bar.visibility = View.GONE
+        myAdapter = homeViewModel.chatsList.value?.let { ChatListAdapter(it) }!!
 
+        home_page_chat_list_recycler.apply {
+            adapter = myAdapter
+        }
+
+        homeViewModel.chatsList.observe(viewLifecycleOwner, { list ->
+            if (list != null) {
+                directs_progress_bar.visibility = View.GONE
+                myAdapter.list = list
+                myAdapter.notifyDataSetChanged()
             }
         })
 
-        directs_progress_bar.visibility = View.VISIBLE
-        homeViewModel.getUserInfo() // this function's structure should change due to our own use (id , username , name)
+    }
 
+    override fun onResume() {
+        super.onResume()
+        directs_progress_bar.visibility = View.VISIBLE
+        homeViewModel.getChatsList(homeViewModel.currentUser()?.uid.toString())
     }
 }
