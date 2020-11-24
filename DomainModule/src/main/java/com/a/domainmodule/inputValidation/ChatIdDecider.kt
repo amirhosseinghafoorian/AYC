@@ -5,7 +5,7 @@ class ChatIdDecider {
     fun decideChatIdFormat(senderId : String , receiverId : String) : String {
         var senderScore = 0
         var receiverScore = 0
-        repeat(4){
+        repeat(8){
             senderScore += scoreSingleChar(senderId[it])
             receiverScore += scoreSingleChar(receiverId[it])
         }

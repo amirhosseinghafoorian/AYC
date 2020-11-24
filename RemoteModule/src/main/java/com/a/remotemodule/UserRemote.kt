@@ -13,12 +13,12 @@ class UserRemote
     private val rootReference: DatabaseReference
 ) {
 
-    fun signUp(email: String, password: String): Task<AuthResult>? {
-        return auth.createUserWithEmailAndPassword(email, password)
+    fun signUp(email: String, password: String): Task<AuthResult> {
+        return auth.createUserWithEmailAndPassword("$email@gmail.com", password)
     }
 
-    fun login(email: String, password: String): Task<AuthResult>? {
-        return auth.signInWithEmailAndPassword(email, password)
+    fun login(email: String, password: String): Task<AuthResult> {
+        return auth.signInWithEmailAndPassword("$email@gmail.com", password)
     }
 
     fun setUserInfo(name: String, username: String) {

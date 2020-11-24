@@ -13,16 +13,11 @@
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginBottom="4dp"
+        android:layout_marginTop="1dp"
         android:backgroundTint="@android:color/black"
         android:checkable="true"
         android:clickable="true"
         android:focusable="true"
-        android:layoutDirection="rtl"
-        app:cardCornerRadius="20dp"
         app:cardElevation="2dp"
         app:rippleColor="@android:color/white">
 
@@ -32,21 +27,22 @@
             android:layout_margin="8dp">
 
             <com.google.android.material.textview.MaterialTextView
+                android:gravity="center"
                 android:id="@+id/users_list_username_tv"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
                 android:text="@{data.username}"
                 android:textColor="@android:color/white"
-                android:textSize="24sp"
-                android:textStyle="bold"
+                android:textSize="30sp"
+                android:textStyle="italic"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <com.google.android.material.textview.MaterialTextView
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="4dp"
-                android:text="@{data.name}"
                 android:textColor="@android:color/white"
                 android:textSize="16sp"
                 app:layout_constraintTop_toBottomOf="@id/users_list_username_tv" />

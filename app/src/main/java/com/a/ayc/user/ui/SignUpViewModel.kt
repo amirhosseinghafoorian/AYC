@@ -27,14 +27,14 @@ class SignUpViewModel
 
     fun signUp(email: String, password: String) {
         val result = signUpUseCase.signUp(email, password)
-        result?.addOnCompleteListener {
+        result.addOnCompleteListener {
             currentUser.postValue(result)
         }
     }
 
     fun login(email: String, password: String) {
         val result = signUpUseCase.login(email, password)
-        result?.addOnCompleteListener {
+        result.addOnCompleteListener {
             currentUser.postValue(result)
         }
     }

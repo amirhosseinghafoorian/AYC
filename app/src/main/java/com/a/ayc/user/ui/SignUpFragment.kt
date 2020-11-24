@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_sign_up.*
+import java.util.*
 
 @AndroidEntryPoint
 class SignUpFragment : Fragment() {
@@ -35,8 +36,11 @@ class SignUpFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                signUpViewModel.setUserInfo(signUp_et_4.editText?.text.toString() , signUp_et_1.editText?.text.toString())
-                findNavController().navigate(SignUpFragmentDirections.actionGlobalHomeFragment())
+                signUpViewModel.setUserInfo(
+                    signUp_et_4.editText?.text.toString(),
+                    signUp_et_1.editText?.text.toString()
+                )
+                findNavController().navigate(SignUpFragmentDirections.actionGlobalHomeFragment("signUp"))
             }
         })
 
@@ -45,8 +49,8 @@ class SignUpFragment : Fragment() {
             val password = signUp_et_2.editText?.text.toString()
             val repeatPassword = signUp_et_3.editText?.text.toString()
             val name = signUp_et_4.editText?.text.toString()
-            if (validateInputs(email, password, repeatPassword, name)) {
-                signUpViewModel.signUp(email, password)
+            if (validateInputs(email.toLowerCase(Locale.ROOT), password, repeatPassword, name)) {
+                signUpViewModel.signUp(email.toLowerCase(Locale.ROOT), password)
             }
         }
     }

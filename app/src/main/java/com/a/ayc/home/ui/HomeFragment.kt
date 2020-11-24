@@ -10,6 +10,8 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.a.ayc.R
+import com.a.ayc.chat.ui.ChatFragmentArgs
+import com.a.ayc.general.GeneralStrings
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -19,6 +21,14 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : Fragment() {
 
     private val homeViewModel: HomeViewModel by viewModels()
+    private lateinit var base: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        base =
+            arguments?.let { HomeFragmentArgs.fromBundle(it).base }.toString()
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,6 +44,11 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        if (base == "signUp") {
+            // it should take the admin id dynamic
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatFragment(GeneralStrings.adminId))
+        }
 
         btn_logout.setOnClickListener {
             showLogoutDialog()

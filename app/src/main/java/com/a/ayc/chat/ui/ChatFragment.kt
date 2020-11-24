@@ -33,7 +33,7 @@ class ChatFragment : Fragment() {
         val callback: OnBackPressedCallback =
             object : OnBackPressedCallback(true) {
                 override fun handleOnBackPressed() {
-                    findNavController().navigate(ChatFragmentDirections.actionChatFragmentToHomeFragment())
+                    findNavController().navigate(ChatFragmentDirections.actionChatFragmentToHomeFragment("chat"))
                 }
             }
         requireActivity().onBackPressedDispatcher.addCallback(this, callback)
@@ -42,7 +42,7 @@ class ChatFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding =
             DataBindingUtil.inflate(inflater, R.layout.fragment_chat, container, false)
         return binding.root
@@ -71,7 +71,7 @@ class ChatFragment : Fragment() {
         })
 
         chatViewModel.usernameFromUid(messageReceiver)
-        chatViewModel.isUserInDirect(messageReceiver)
+        chatViewModel.isUserInDirect(chatViewModel.currentUser()?.uid.toString(), messageReceiver)
 
     }
 }
