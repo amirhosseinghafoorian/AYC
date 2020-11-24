@@ -11,6 +11,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.viewpager2.widget.ViewPager2
 import com.a.ayc.R
 import com.a.ayc.chat.ui.ChatFragmentArgs
+import com.a.ayc.general.GeneralStrings
 import com.google.android.material.tabs.TabLayout
 import com.google.android.material.tabs.TabLayoutMediator
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +47,7 @@ class HomeFragment : Fragment() {
 
         if (base == "signUp") {
             // it should take the admin id dynamic
-            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatFragment("3QUek1hYRlhnLxerjXpXAhgR7eu2"))
+            findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToChatFragment(GeneralStrings.adminId))
         }
 
         btn_logout.setOnClickListener {
