@@ -11,6 +11,8 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:background="@android:color/darker_gray"
+
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -29,7 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="1dp"
-            android:backgroundTint="@android:color/holo_blue_light"
+            android:backgroundTint="@android:color/black"
             android:checkable="true"
             android:clickable="true"
             android:focusable="true"
@@ -49,8 +51,8 @@
                     android:layout_margin="4dp"
                     android:gravity="center"
                     android:text="@{data.text}"
-                    android:textColor="@android:color/black"
-                    android:textSize="12sp"
+                    android:textColor="@android:color/white"
+                    android:textSize="20sp"
                     android:textStyle="normal"
                     app:layout_constraintTop_toTopOf="parent" />
 

@@ -27,18 +27,18 @@ class TestAdapter(
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RecyclerView.ViewHolder {
-        if (viewType == GeneralStrings.sentMessage) {
+        return if (viewType == GeneralStrings.sentMessage) {
             val binding: SentItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 R.layout.sent_item, parent, false
             )
-            return MyViewHolder1(binding)
+            MyViewHolder1(binding)
         } else {
             val binding: ReceivedItemBinding = DataBindingUtil.inflate(
                 LayoutInflater.from(parent.context),
                 R.layout.received_item, parent, false
             )
-            return MyViewHolder2(binding)
+            MyViewHolder2(binding)
         }
     }
 

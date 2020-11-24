@@ -11,7 +11,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import com.a.ayc.databinding.FragmentChatBinding
+import com.a.ayc.general.MessageType
+import com.a.ayc.general.TestAdapter
+import com.a.ayc.home.ui.ChatListAdapter
+import com.a.ayc.model.MessageModel
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.android.synthetic.main.fragment_chat.*
+import kotlinx.android.synthetic.main.fragment_home_tab1.*
 
 @AndroidEntryPoint
 class ChatFragment : Fragment() {
@@ -19,6 +25,7 @@ class ChatFragment : Fragment() {
     private lateinit var binding: FragmentChatBinding
     private lateinit var messageReceiver: String
     private lateinit var messageSender: String
+    private lateinit var myAdapter: TestAdapter
 
     private val chatViewModel: ChatViewModel by viewModels()
 
@@ -72,6 +79,37 @@ class ChatFragment : Fragment() {
 
         chatViewModel.usernameFromUid(messageReceiver)
         chatViewModel.isUserInDirect(chatViewModel.currentUser()?.uid.toString(), messageReceiver)
+
+        val list = mutableListOf<MessageModel>()
+        repeat(50) {
+            list.add(
+                MessageModel(
+                    it.toString(),
+                    "message : $it",
+                    MessageType.SENT
+                )
+            )
+        }
+
+        repeat(50) {
+            list.add(
+                MessageModel(
+                    it.toString(),
+                    "message : $it",
+                    MessageType.RECEIVED
+                )
+            )
+        }
+
+        list.shuffle()
+        list.shuffle()
+        list.shuffle()
+
+        myAdapter = TestAdapter(list)
+
+        chat_recycler.apply {
+            adapter = myAdapter
+        }
 
     }
 }
