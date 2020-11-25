@@ -9,6 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
+import com.a.ayc.general.GeneralStrings
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
 import java.util.*
@@ -36,7 +37,11 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment("login"))
+                findNavController().navigate(
+                    LoginFragmentDirections.actionGlobalHomeFragment(
+                        GeneralStrings.keyLogin
+                    )
+                )
             }
         })
 
