@@ -13,6 +13,7 @@ import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import com.a.ayc.databinding.FragmentChatBinding
 import com.a.ayc.general.ChatAdapter
+import com.a.ayc.general.GeneralStrings
 import com.a.ayc.general.MessageType
 import com.a.ayc.model.MessageModel
 import dagger.hilt.android.AndroidEntryPoint
@@ -42,7 +43,7 @@ class ChatFragment : Fragment() {
                 override fun handleOnBackPressed() {
                     findNavController().navigate(
                         ChatFragmentDirections.actionChatFragmentToHomeFragment(
-                            "chat"
+                            GeneralStrings.keyChat
                         )
                     )
                 }

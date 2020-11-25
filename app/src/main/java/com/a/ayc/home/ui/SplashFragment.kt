@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
+import com.a.ayc.general.GeneralStrings
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -32,7 +33,7 @@ class SplashFragment : Fragment() {
             if (homeViewModel.currentUser() == null) findNavController().navigate(
                 SplashFragmentDirections.actionSplashFragmentToNavigation()
             )
-            else findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment("splash"))
+            else findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment(GeneralStrings.keySplash))
         }, 1000)
     }
 }
