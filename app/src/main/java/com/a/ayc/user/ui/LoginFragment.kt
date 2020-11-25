@@ -37,7 +37,11 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment(GeneralStrings.keyLogin))
+                findNavController().navigate(
+                    LoginFragmentDirections.actionGlobalHomeFragment(
+                        GeneralStrings.keyLogin
+                    )
+                )
             }
         })
 

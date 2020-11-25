@@ -2,7 +2,6 @@ package com.a.ayc.home.ui
 
 import android.os.Bundle
 import android.os.Handler
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -33,7 +32,11 @@ class SplashFragment : Fragment() {
             if (homeViewModel.currentUser() == null) findNavController().navigate(
                 SplashFragmentDirections.actionSplashFragmentToNavigation()
             )
-            else findNavController().navigate(SplashFragmentDirections.actionSplashFragmentToHomeFragment(GeneralStrings.keySplash))
+            else findNavController().navigate(
+                SplashFragmentDirections.actionSplashFragmentToHomeFragment(
+                    GeneralStrings.keySplash
+                )
+            )
         }, 1000)
     }
 }

@@ -41,7 +41,11 @@ class SignUpFragment : Fragment() {
                     signUp_et_4.editText?.text.toString(),
                     signUp_et_1.editText?.text.toString()
                 )
-                findNavController().navigate(SignUpFragmentDirections.actionGlobalHomeFragment(GeneralStrings.keySignUp))
+                findNavController().navigate(
+                    SignUpFragmentDirections.actionGlobalHomeFragment(
+                        GeneralStrings.keySignUp
+                    )
+                )
             }
         })
 
