@@ -44,7 +44,7 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:backgroundTint="@android:color/white"
-        android:text="Sign Up"
+        android:text="@string/sign_up"
         android:textColor="@android:color/black"
         app:layout_constraintLeft_toRightOf="@id/chs_gl_2"
         app:layout_constraintRight_toLeftOf="@id/chs_gl_3"
