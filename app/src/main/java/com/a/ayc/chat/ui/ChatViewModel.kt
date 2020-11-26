@@ -1,6 +1,5 @@
 package com.a.ayc.chat.ui
 
-import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -71,22 +70,25 @@ class ChatViewModel @ViewModelInject constructor(
         val chat = chatUseCase.getChatRoom(chatId)
         chat.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                Log.i("chat_test", snapshot.child("text").value.toString())
+                val message = snapshot.child("message").value.toString()
+                val messageSenderId = message.substringAfterLast(':')
+                val messageText = message.substringBeforeLast(':')
                 val type: MessageType =
-                    if (snapshot.child("sentBy").value.toString() == currentUser()?.uid) {
+                    if (messageSenderId == currentUser()?.uid) {
                         MessageType.SENT
                     } else {
                         MessageType.RECEIVED
                     }
+
                 chatMessages.value?.add(
                     MessageModel(
                         snapshot.key.toString(),
-                        snapshot.child("text").value.toString(),
+                        messageText,
                         type
                     )
                 )
-                val a = chatMessages.value
-                val b = ""
+                chatMessages.postValue(chatMessages.value)
+
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {

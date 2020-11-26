@@ -95,8 +95,8 @@ class ChatFragment : Fragment() {
                 adapter = myAdapter
             }
 
-            chatViewModel.chatMessages.observe(viewLifecycleOwner , {list ->
-                if (list != null){
+            chatViewModel.chatMessages.observe(viewLifecycleOwner, { list ->
+                if (list != null) {
                     myAdapter.list = list
                     myAdapter.notifyDataSetChanged()
                     chat_recycler.scrollToPosition(list.size - 1)
