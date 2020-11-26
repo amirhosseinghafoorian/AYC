@@ -2,6 +2,7 @@ package com.a.ayc.home.ui
 
 import android.os.Bundle
 import android.os.Handler
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +11,13 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import com.a.ayc.general.GeneralStrings
+import com.a.domainmodule.inputValidation.GetCurrentTime
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
+import java.util.*
 
 @AndroidEntryPoint
 class SplashFragment : Fragment() {
