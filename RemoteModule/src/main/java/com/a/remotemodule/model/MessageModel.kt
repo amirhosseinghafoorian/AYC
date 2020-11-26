@@ -1,6 +1,4 @@
-package com.a.ayc.model
-
-import com.a.ayc.general.MessageType
+package com.a.remotemodule.model
 
 data class MessageModel (
     var id : String ,

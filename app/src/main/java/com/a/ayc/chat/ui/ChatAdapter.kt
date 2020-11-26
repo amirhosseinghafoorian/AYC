@@ -8,8 +8,8 @@ import com.a.ayc.R
 import com.a.ayc.databinding.ReceivedItemBinding
 import com.a.ayc.databinding.SentItemBinding
 import com.a.ayc.general.GeneralStrings
-import com.a.ayc.general.MessageType
-import com.a.ayc.model.MessageModel
+import com.a.remotemodule.model.MessageType
+import com.a.remotemodule.model.MessageModel
 
 
 class ChatAdapter(

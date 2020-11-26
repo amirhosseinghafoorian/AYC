@@ -1,5 +1,6 @@
 package com.a.remotemodule
 
+import com.a.remotemodule.model.MessageModel
 import com.google.firebase.database.DatabaseReference
 import javax.inject.Inject
 
@@ -17,5 +18,13 @@ class ChatRemote @Inject constructor(
         return rootReference
             .child("ChatRooms")
             .child(chatId)
+    }
+
+    fun sendMessage(message : MessageModel , chatId: String){
+        rootReference
+            .child("ChatRooms")
+            .child(chatId)
+            .child(message.id)
+            .child("text").setValue(message.text)
     }
 }

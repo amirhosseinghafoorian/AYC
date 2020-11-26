@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import com.a.ayc.databinding.FragmentChatBinding
 import com.a.ayc.general.GeneralStrings
-import com.a.ayc.general.MessageType
-import com.a.ayc.model.MessageModel
+import com.a.remotemodule.model.MessageType
+import com.a.remotemodule.model.MessageModel
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.coroutines.launch
@@ -26,6 +26,7 @@ class ChatFragment : Fragment() {
     private lateinit var messageReceiver: String
     private lateinit var messageSender: String
     private lateinit var myAdapter: ChatAdapter
+    private lateinit var chatId: String
 
     private val chatViewModel: ChatViewModel by viewModels()
 
@@ -72,7 +73,7 @@ class ChatFragment : Fragment() {
 
             chatViewModel.isInDirect.observe(viewLifecycleOwner, { isInDirect ->
                 if (isInDirect != null) {
-                    val chatId = chatViewModel.chatIdDecide(messageReceiver)
+                    chatId = chatViewModel.chatIdDecide(messageReceiver)
                     if (isInDirect) {
                         // open existing chat
                     } else {
@@ -80,6 +81,7 @@ class ChatFragment : Fragment() {
                         chatViewModel.putChatInDirect(messageReceiver, messageSender)
                         chatViewModel.putChatInDirect(messageSender, messageReceiver)
                     }
+                    chatViewModel.openChat(chatId)
                 }
             })
 
@@ -101,13 +103,17 @@ class ChatFragment : Fragment() {
 
                 if (chat_type_et.editText?.text?.isNotBlank() == true) {
 
-                    list.add(
-                        MessageModel(
-                            "",
-                            chat_type_et.editText?.text.toString(),
-                            MessageType.SENT
-                        )
+                    val message = MessageModel(
+                        "",
+                        chat_type_et.editText?.text.toString(),
+                        MessageType.SENT
                     )
+
+                    list.add(
+                        message
+                    )
+
+                    chatViewModel.sendMessage(message , chatId)
 
                     // here it should check that if it is a sent message gone the seen icon
                     // and if it is a received message visible the icon

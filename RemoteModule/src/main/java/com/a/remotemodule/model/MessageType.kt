@@ -1,4 +1,4 @@
-package com.a.ayc.general
+package com.a.remotemodule.model
 
 enum class MessageType {
     SENT,
