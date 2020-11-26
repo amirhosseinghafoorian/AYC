@@ -13,8 +13,8 @@ import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
 import com.a.ayc.databinding.FragmentChatBinding
 import com.a.ayc.general.GeneralStrings
-import com.a.remotemodule.model.MessageType
 import com.a.remotemodule.model.MessageModel
+import com.a.remotemodule.model.MessageType
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_chat.*
 import kotlinx.coroutines.launch
@@ -74,9 +74,7 @@ class ChatFragment : Fragment() {
             chatViewModel.isInDirect.observe(viewLifecycleOwner, { isInDirect ->
                 if (isInDirect != null) {
                     chatId = chatViewModel.chatIdDecide(messageReceiver)
-                    if (isInDirect) {
-                        // open existing chat
-                    } else {
+                    if (!isInDirect) {
                         chatViewModel.createChatRoom(chatId)
                         chatViewModel.putChatInDirect(messageReceiver, messageSender)
                         chatViewModel.putChatInDirect(messageSender, messageReceiver)
@@ -91,13 +89,19 @@ class ChatFragment : Fragment() {
                 messageReceiver
             )
 
-            val list = mutableListOf<MessageModel>()
-
-            myAdapter = ChatAdapter(list)
+            myAdapter = chatViewModel.chatMessages.value?.let { ChatAdapter(it) }!!
 
             chat_recycler.apply {
                 adapter = myAdapter
             }
+
+            chatViewModel.chatMessages.observe(viewLifecycleOwner , {list ->
+                if (list != null){
+                    myAdapter.list = list
+                    myAdapter.notifyDataSetChanged()
+                    chat_recycler.scrollToPosition(list.size - 1)
+                }
+            })
 
             send_cv.setOnClickListener {
 
@@ -109,21 +113,13 @@ class ChatFragment : Fragment() {
                         MessageType.SENT
                     )
 
-                    list.add(
-                        message
-                    )
-
-                    chatViewModel.sendMessage(message , chatId)
+                    chatViewModel.sendMessage(message, chatId, messageSender)
 
                     // here it should check that if it is a sent message gone the seen icon
                     // and if it is a received message visible the icon
 
                     chat_type_et.editText?.setText("")
 
-                    myAdapter.list = list
-                    myAdapter.notifyItemInserted(list.size)
-
-                    chat_recycler.scrollToPosition(list.size - 1)
                 }
             }
 

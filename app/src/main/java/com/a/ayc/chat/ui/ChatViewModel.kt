@@ -4,10 +4,11 @@ import android.util.Log
 import androidx.hilt.lifecycle.ViewModelInject
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.a.remotemodule.model.MessageModel
 import com.a.domainmodule.domain.AllUsersUseCase
 import com.a.domainmodule.domain.ChatUseCase
 import com.a.domainmodule.domain.SignUpUseCase
+import com.a.remotemodule.model.MessageModel
+import com.a.remotemodule.model.MessageType
 import com.google.firebase.auth.FirebaseUser
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -19,11 +20,11 @@ class ChatViewModel @ViewModelInject constructor(
     private val chatUseCase: ChatUseCase,
     private val allUsersUseCase: AllUsersUseCase,
 
-) : ViewModel() {
+    ) : ViewModel() {
 
     var receiverUsername = MutableLiveData<String>()
     var isInDirect = MutableLiveData<Boolean>()
-    var chatMessages = MutableLiveData<MutableList<String>>()
+    var chatMessages = MutableLiveData<MutableList<MessageModel>>()
 
     init {
         chatMessages.value = mutableListOf()
@@ -71,6 +72,21 @@ class ChatViewModel @ViewModelInject constructor(
         chat.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
                 Log.i("chat_test", snapshot.child("text").value.toString())
+                val type: MessageType =
+                    if (snapshot.child("sentBy").value.toString() == currentUser()?.uid) {
+                        MessageType.SENT
+                    } else {
+                        MessageType.RECEIVED
+                    }
+                chatMessages.value?.add(
+                    MessageModel(
+                        snapshot.key.toString(),
+                        snapshot.child("text").value.toString(),
+                        type
+                    )
+                )
+                val a = chatMessages.value
+                val b = ""
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -88,6 +104,7 @@ class ChatViewModel @ViewModelInject constructor(
         })
     }
 
-    fun sendMessage(message : MessageModel , chatId: String) = chatUseCase.sendMessage(message , chatId)
+    fun sendMessage(message: MessageModel, chatId: String, senderId: String) =
+        chatUseCase.sendMessage(message, chatId, senderId)
 
 }

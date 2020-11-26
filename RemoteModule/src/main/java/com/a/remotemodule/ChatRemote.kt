@@ -20,11 +20,16 @@ class ChatRemote @Inject constructor(
             .child(chatId)
     }
 
-    fun sendMessage(message : MessageModel , chatId: String){
+    fun sendMessage(message : MessageModel , chatId: String , senderId : String){
         rootReference
             .child("ChatRooms")
             .child(chatId)
             .child(message.id)
             .child("text").setValue(message.text)
+        rootReference
+            .child("ChatRooms")
+            .child(chatId)
+            .child(message.id)
+            .child("sentBy").setValue(senderId)
     }
 }

@@ -14,7 +14,7 @@ class ChatUseCase @Inject constructor(
 
     fun getChatRoom(chatId: String) = chatRemote.getChatRoom(chatId)
 
-    fun sendMessage(message: MessageModel, chatId: String) {
+    fun sendMessage(message: MessageModel, chatId: String, senderId : String) {
         message.id =
             currentTime.customDateToString("year", null) + "_" +
                     currentTime.customDateToString("month", null) + "_" +
@@ -23,7 +23,7 @@ class ChatUseCase @Inject constructor(
                     currentTime.customDateToString("minute", null) + "_" +
                     currentTime.customDateToString("second", null) + "_" +
                     currentTime.customDateToString("milli", null)
-        chatRemote.sendMessage(message, chatId)
+        chatRemote.sendMessage(message, chatId,senderId)
     }
 
 }
