@@ -1,19 +1,44 @@
 package com.a.domainmodule.inputValidation
 
 import android.util.Log
-import android.util.Patterns
 
 class ValidateInput {
 
     fun checkEmailValidation(email: String): Boolean {
         if (email.isEmpty()) {
-            Log.i("baby", "Email address can not be empty")
+            Log.i("baby", "Username can not be empty")
             return false
-        } else if (!Patterns.EMAIL_ADDRESS.matcher(email).matches()) {
-            Log.i("baby", "Enter a valid email address")
+        } else if (email.contains('@') ||
+            email.contains('*') ||
+            email.contains('/') ||
+            email.contains('-') ||
+            email.contains('+') ||
+            email.contains('(') ||
+            email.contains(')') ||
+            email.contains('#') ||
+            email.contains('$') ||
+            email.contains('^') ||
+            email.contains('=') ||
+            email.contains('!') ||
+            email.contains(':') ||
+            email.contains('\'') ||
+            email.contains('\\') ||
+            email.contains('\"') ||
+            email.contains(';') ||
+            email.contains('{') ||
+            email.contains('}') ||
+            email.contains('>') ||
+            email.contains('<') ||
+            email.contains('?') ||
+            email.contains(',')
+        ) {
+            Log.i("baby", "Username is invalid")
+            return false
+        } else if (email.length > 20) {
+            Log.i("baby", "Username should be maximum 20 characters")
             return false
         }
-        Log.i("baby", "Email Confirmed")
+        Log.i("baby", "Username Confirmed")
         return true
     }
 

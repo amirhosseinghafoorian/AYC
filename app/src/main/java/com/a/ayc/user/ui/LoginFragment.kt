@@ -9,8 +9,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.a.ayc.R
+import com.a.ayc.general.GeneralStrings
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_login.*
+import java.util.*
 
 @AndroidEntryPoint
 class LoginFragment : Fragment() {
@@ -35,16 +37,20 @@ class LoginFragment : Fragment() {
                     Toast.LENGTH_SHORT
                 ).show()
             } else {
-                findNavController().navigate(LoginFragmentDirections.actionGlobalHomeFragment())
+                findNavController().navigate(
+                    LoginFragmentDirections.actionGlobalHomeFragment(
+                        GeneralStrings.keyLogin
+                    )
+                )
             }
         })
 
         btn_login.setOnClickListener {
             val email = login_et_1.editText?.text.toString()
             val password = login_et_2.editText?.text.toString()
-            if (validateInputs(email, password)) {
+            if (validateInputs(email.toLowerCase(Locale.ROOT), password)) {
                 signUpViewModel.logout()
-                signUpViewModel.login(email, password)
+                signUpViewModel.login(email.toLowerCase(Locale.ROOT), password)
             }
         }
     }
